@@ -44,7 +44,7 @@ class Markov:
             if rnd <= probSum:
                 return word
 
-    def generateText(self, limit=500):
+    def generateText(self, limit=5000):
         currentWord = ""
         text = ""
         for i in range(limit):
@@ -53,13 +53,3 @@ class Markov:
                 break
             text += currentWord + " "
         return text
-                
-
-# words = {
-#     "Olá": {
-#         "bom": 20
-#         "Carlos": 12
-#         "\t": 34 # count
-#         " ": 2 # end
-#     }
-# }

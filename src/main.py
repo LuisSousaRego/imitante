@@ -19,7 +19,7 @@ def cleanText(text):
     result = re.sub(regexOtherLinks, '', result)
 
     # remove unwanted chars
-    regexChars = r'\**\(*\)*'
+    regexChars = r'\**\(*\)*~*(&#x200B)*'
     result = re.sub(regexChars, '', result)
     
     return result
@@ -28,7 +28,7 @@ def cleanText(text):
 portugal = getPortugal()
 mk = Markov()
 
-for submission in portugal.hot(limit=1000):
+for submission in portugal.hot(limit=10000):
     if submission.is_self:
         processedText = cleanText(submission.selftext)
         words = re.findall(r'\S+|\n', processedText)
