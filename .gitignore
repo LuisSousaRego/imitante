@@ -1,3 +1,4 @@
-.gitignore
 praw.ini
 *.pyc
+text/*
+__pycache__

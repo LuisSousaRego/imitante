@@ -2,12 +2,11 @@ import random
 
 class Markov:
     countChar = "*"
-    endChar = "()"
+    endChar = "~"
 
     def __init__(self):
         self.firstWords = {}
         self.words = {}
-        self.postCounter = 0
 
     def addFirstWord(self, word):
         if word in self.firstWords:
@@ -44,12 +43,12 @@ class Markov:
             if rnd <= probSum:
                 return word
 
-    def generateText(self, limit=5000):
+    def generateText(self):
+        wordSet = self.getNextWord("") # get first word set
+        text = " ".join(wordSet) + " "
         currentWord = ""
-        text = ""
-        for i in range(limit):
-            currentWord = self.getNextWord(currentWord)
-            if currentWord == self.endChar:
-                break
+        while currentWord != self.endChar:
+            currentWord = self.getNextWord(wordSet)
             text += currentWord + " "
+            wordSet = wordSet[1:] + (currentWord, )
         return text
