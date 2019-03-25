@@ -15,7 +15,8 @@ Generate text from subreddits using markov chains
 Create a [praw.ini file](https://praw.readthedocs.io/en/latest/getting_started/configuration/prawini.html?highlight=praw.ini#praw-ini-files) inside the /src/ directory
 Add a new bot to the file with your reddit app credentials
 
-```[imitante]
+```
+[imitante]
 client_id=yourclientid
 client_secret=yourclientsecret
 password=yourpassword
@@ -26,5 +27,6 @@ username=yourusername
 ## Get started
 
 Open the terminal in project folder and run the 'main.py file' with:
-```python3 /src/main.py
+```
+python3 /src/main.py
 ```
