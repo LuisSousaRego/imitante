@@ -2,6 +2,7 @@
 
 Generate text from subreddits self posts using markov chains
 
+
 ## Prerequisites
 
 - A reddit account and a [reddit script app](https://github.com/reddit-archive/reddit/wiki/OAuth2-Quick-Start-Example#first-steps)
@@ -27,9 +28,11 @@ username=yourusername
 ## Get started
 
 Open the terminal in the `src/` directory inside the project and run the `main.py` file with:
+
 `python3 main.py`
 
 The generated text will be written in a .txt file inside `text/` directory
+
 
 ## Options
 
@@ -39,11 +42,13 @@ Choose which subreddit the posts are from
 
 `python3 main.py --subreddit WritingPrompts`
 
+
 ### --posts
 
 Max number of posts to read
 
 `python3 main.py --posts 500`
+
 
 ### --order
 
