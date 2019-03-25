@@ -13,7 +13,7 @@ Generate text from subreddits self posts using markov chains
 ### praw.ini file
 
 Create a [praw.ini file](https://praw.readthedocs.io/en/latest/getting_started/configuration/prawini.html?highlight=praw.ini#praw-ini-files) inside the /src/ directory
-Add a new bot to the file with your reddit app credentials
+Add a new bot to the file with your reddit app credentials by appending the following to your `praw.ini` file:
 
 ```
 [imitante]
