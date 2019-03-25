@@ -37,23 +37,18 @@ The generated text will be written in a .txt file inside `/text/` directory
 
 Choose which subreddit the posts are from
 
-Example:
 `python3 /src/main.py --subreddit WritingPrompts`
 
 ##### --posts
 
 Max number of posts to read
 
-Example:
 `python3 /src/main.py --posts 500`
 
 ##### --order
 
 Order of the Markov chain
 
-Higher number should get better results, too high and it will just quote text from posts
+Higher number should get better results, too high and it will just quote text from posts. Recommended 1 to 3
 
-Recommended: 1 to 3
-
-Example:
 `python3 /src/main.py --order 2`
