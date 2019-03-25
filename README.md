@@ -19,12 +19,12 @@ Add a new bot to the file with your reddit app credentials
 client_id=yourclientid
 client_secret=yourclientsecret
 password=yourpassword
-username=yourusername```
+username=yourusername
+```
 
 
 ## Get started
 
 Open the terminal in project folder and run the 'main.py file' with:
-```
-python3 /src/main.py
+```python3 /src/main.py
 ```
