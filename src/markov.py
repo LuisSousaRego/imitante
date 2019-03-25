@@ -51,4 +51,4 @@ class Markov:
             currentWord = self.getNextWord(wordSet)
             text += currentWord + " "
             wordSet = wordSet[1:] + (currentWord, )
-        return text
+        return text[:-2]
