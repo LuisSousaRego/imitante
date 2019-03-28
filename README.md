@@ -32,29 +32,10 @@ Open the terminal in the `src/` directory inside the project and run the `main.p
 
 `python3 main.py`
 
-The generated text will be written in a .txt file inside `text/` directory.
+For help on all available options:
+
+`python3 main.py -h`
+
+The generated text is written in a .txt file inside `text/` directory.
 
 
-## Options
-
-### --subreddit
-
-Choose which subreddit the posts are from.
-
-`python3 main.py --subreddit WritingPrompts`
-
-
-### --posts
-
-Max number of posts to read.
-
-`python3 main.py --posts 500`
-
-
-### --order
-
-Order of the Markov chain.
-
-Higher number should get better results, too high and it will just quote text from posts. Recommended 1 to 3.
-
-`python3 main.py --order 2`

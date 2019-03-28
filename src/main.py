@@ -37,15 +37,16 @@ def cleanText(text):
     return result
 
 def fileHeader(date):
-    return """-----
+    return """---
 https://github.com/LuisSousaRego/imitante
 Subreddit: {}
 Posts used: {}
+Titles used: {}
 Time: {}
 Markov-chain order: {}
------
+---
 
-""".format(args.subreddit, postCounter, date.strftime("%Y/%m/%d %H:%M:%S"), args.order)
+""".format(args.subreddit, postCounter, titleCounter, date.strftime("%Y/%m/%d %H:%M:%S"), args.order)
     
 
 
@@ -55,35 +56,44 @@ Markov-chain order: {}
 
 args = getArgs()
 postCounter = 0
+titleCounter = 0
 
 subreddit = getSubreddit(args.subreddit)
 mkSelfPosts = Markov()
+mkTitles = Markov()
 
 
 for submission in subreddit.search('self:yes', sort='relevance', time_filter='all', limit=args.posts):
-#for submission in subreddit.hot(limit=args.posts):
-    if submission.is_self:
-        processedText = cleanText(submission.selftext)
-        words = re.findall(r'\S+|\n', processedText)
-        if len(words) < args.order + 1: # skip posts that are too small
-            continue
-        
+    # title
+    titleList = submission.title.split(" ")
+    if len(titleList) >= 2: # skip titles that are too small
+        mkTitles.addFirstWord(tuple(titleList[0]))
+        for t in range(1, len(titleList)):
+            mkSelfPosts.addWordTransition(tuple(titleList[t - 1]), titleList[t])
+        titleCounter += 1
+
+    # post
+    processedText = cleanText(submission.selftext)
+    words = re.findall(r'\S+|\n', processedText)
+    if len(words) >= args.order + 1: # skip posts that are too small
         firstWords = [ words[o] for o in range(args.order) ]
         mkSelfPosts.addFirstWord(tuple(firstWords))
 
         for i in range(args.order, len(words)):
             previousWords = [words[x] for x in range(i - args.order, i)]
             mkSelfPosts.addWordTransition(tuple(previousWords), words[i])
-            if i == len(words) - 1:
-                mkSelfPosts.addWordTransition(words[i], " ") # can't remember why this is here
+            #if i == len(words) - 1:
+                #mkSelfPosts.addWordTransition(words[i], " ") # can't remember why this is here
         postCounter += 1
 
+generatedTitle = mkTitles.generateText()
 generatedText = mkSelfPosts.generateText()
+
 
 nowTime = datetime.datetime.now()
 filename = "../text/{}-{}.txt".format(nowTime.strftime("%Y%m%d%H%M%S"), args.subreddit)
 os.makedirs(os.path.dirname(filename), exist_ok=True)
 f = open(filename, "w")
-f.write(fileHeader(nowTime) + generatedText)
+f.write(fileHeader(nowTime) + "-" + generatedTitle + "-\n" + generatedText)
 
 print("Output in file: {}".format(filename[8:]))
